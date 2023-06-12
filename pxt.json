@@ -10,7 +10,6 @@
     "files": [
         "README.md",
         "main.ts",
-        "main.py",
         "peripheral_strings.json"
     ],
     "testFiles": [

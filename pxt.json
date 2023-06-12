@@ -1,7 +1,7 @@
 {
     "name": "pxt-peripheralbit",
-    "version": "0.0.0",
-    "description": "",
+    "version": "1.0.0",
+    "description": "peripheral",
     "dependencies": {
         "core": "*",
         "radio": "*",

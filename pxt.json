@@ -11,7 +11,7 @@
     "files": [
         "README.md",
         "main.ts",
-        "peripheral_strings.json"
+        "_locales/zh/peripheral_strings.json"
     ],
     "public": true,
     "targetVersions": {

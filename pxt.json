@@ -2,6 +2,7 @@
     "name": "peripheral",
     "version": "1.0.0",
     "description": "peripheral",
+    "license": "MIT",
     "dependencies": {
         "core": "*",
         "radio": "*",
@@ -11,9 +12,6 @@
         "README.md",
         "main.ts",
         "peripheral_strings.json"
-    ],
-    "testFiles": [
-        "test.ts"
     ],
     "public": true,
     "targetVersions": {

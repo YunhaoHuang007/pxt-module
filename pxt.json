@@ -1,7 +1,7 @@
 {
     "name": "peripheral",
     "version": "1.0.0",
-    "description": "peripheral",
+    "description": "peripheral devices",
     "license": "MIT",
     "dependencies": {
         "core": "*",

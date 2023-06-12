@@ -1,4 +1,4 @@
-//% color="#FFFF33" weight=10 icon="\uf0ca" block="Peripheral:bit"
+//% color="#FFFF99" weight=10 icon="\uf0ca" block="Peripheral:bit"
 namespace peripheral {
     //% blockId=button block="Button |digital pin %pin"   group="按键模块"
     //% weight=70

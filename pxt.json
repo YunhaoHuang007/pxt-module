@@ -1,5 +1,5 @@
 {
-    "name": "pxt-peripheralbit",
+    "name": "peripheral",
     "version": "1.0.0",
     "description": "peripheral",
     "dependencies": {

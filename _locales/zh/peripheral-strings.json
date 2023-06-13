@@ -3,7 +3,7 @@
     "peripheral.Button|block": "按键模块引脚%pin检测到按键被按下？",
     "peripheral.MicroSwitch|block": "微型开关引脚%pin检测到开关被按下？",
     "peripheral.CrashButton|block": "触碰模块引脚%pin检测到发生碰撞？",
-    "peripheral.RotaryPotentiometer|block": "电位器引脚%pin读取模拟值",
+    "peripheral.Potentiometer|block": "电位器引脚%pin读取模拟值",
     "peripheral.TouchButton|block": "触摸模块引脚%pin检测到被触摸？",
     "ROCKER_PIN.X_PIN|block": "引脚X",
     "ROCKER_PIN.Y_PIN|block": "引脚Y",

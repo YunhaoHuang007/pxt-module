@@ -22,7 +22,7 @@
     "peripheral.sensor_hall|block": "霍尔传感器引脚%pin读取模拟值",
     "peripheral.sensor_tracking|block": "循迹传感器引脚%pin检测到黑线？",
     "ledon_off._on|block": "点亮",
-    "ledon_off._off|block": "熄灭",    
+    "ledon_off._off|block": "熄灭",
     "peripheral.setled|block": "LED灯引脚%lpin|状态%lstatus",
     "peripheral.setRGBpin|block": "RGB三色灯红(R)%RPin绿(G)%GPin蓝(B)%YPin",
     "peripheral.selectcolor|block": "RGB三色灯颜色值|红(R)%r_color|绿(G)%g_color|蓝(B)%b_color",

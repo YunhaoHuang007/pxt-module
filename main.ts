@@ -1,24 +1,24 @@
-enum ledon_off {
-    //% block="on"
-    _on = 1,
-    //% block="off"
-    _off = 0,
+enum LED_ON_OFF {
+    //% block="ON"
+    LED_ON = 1,
+    //% block="OFF"
+    LED_OFF = 0,
 }
 
-enum EM_DHT11Type {
-    //% block="temperature(℃)" 
-    EM_DHT11_temperature_C = 0,
-    //% block="temperature(℉)"
-    EM_DHT11_temperature_F = 1,
-    //% block="humidity(0~100)"
-    EM_DHT11_humidity = 2
+enum EM_DHT11_TYPE {
+    //% block="Temperature(℃)" 
+    EM_DHT11_TEMPERATURE_C = 0,
+    //% block="Temperature(℉)"
+    EM_DHT11_TEMPERATURE_F = 1,
+    //% block="Humidity(0~100)"
+    EM_DHT11_HUMIDITY = 2
 }
 
-enum _rockerpin {
-    //% block="Xpin"
-    Xpin = 0,
-    //% block="Ypin"
-    Ypin = 1
+enum ROCKER_PIN {
+    //% block="X_PIN"
+    X_PIN = 0,
+    //% block="Y_PIN"
+    Y_PIN = 1
 }
 
 //% color="#FFA500" weight=10 icon="\uf0ca" block="Peripheral:bit"
@@ -37,8 +37,7 @@ namespace peripheral {
     //% blockId=microswitch block="microswitch |digital pin %pin"   group="微型开关"
     //% weight=70
     //% subcategory="基础输入模块"
-    export function microswitch(pin: DigitalPin): boolean {
-    //   pins.digitalWritePin(pin, 0)
+    export function microswitch(pin: DigitalPin): boolean {    
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
@@ -92,11 +91,11 @@ namespace peripheral {
     //% blockId=_analogRead block="select analog pin  %selectpin" group="摇杆模块"
     //% weight=69
     //% subcategory="基础输入模块"
-    export function _analogRead(selectpin: _rockerpin): number {
+    export function _analogRead(selectpin: ROCKER_PIN): number {
         let a
-        if (selectpin == 0)
+        if (selectpin == ROCKER_PIN.X_PIN)
             a = Xpin
-        else if (selectpin == 1)
+        else if (selectpin == ROCKER_PIN.Y_PIN)
             a = Ypin
         return pins.analogReadPin(a)
     }
@@ -158,7 +157,7 @@ namespace peripheral {
     //% subcategory="传感器"
     //% inlineInputMode=inline
     //% weight=72
-    export function dht11value(dht11pin: DigitalPin, dht11type: EM_DHT11Type): number {
+    export function dht11value(dht11pin: DigitalPin, dht11type: EM_DHT11_TYPE): number {
         const DHT11_TIMEOUT = 100
         const buffer = pins.createBuffer(40)
         const data = [0, 0, 0, 0, 0]
@@ -246,11 +245,11 @@ namespace peripheral {
         }
 
         switch (dht11type) {
-            case EM_DHT11Type.EM_DHT11_temperature_C:
+            case EM_DHT11_TYPE.EM_DHT11_TEMPERATURE_C:
                 return em_dht11Temperature
-            case EM_DHT11Type.EM_DHT11_temperature_F:
+            case EM_DHT11_TYPE.EM_DHT11_TEMPERATURE_F:
                 return (em_dht11Temperature * 1.8) + 32
-            case EM_DHT11Type.EM_DHT11_humidity:
+            case EM_DHT11_TYPE.EM_DHT11_HUMIDITY:
                 return em_dht11Humidity
         }
     }
@@ -288,7 +287,7 @@ namespace peripheral {
     //% blockId=setled block="set led %lpin|status %lstatus"   group="LED灯"
     //% weight=70
     //% subcategory="显示器"
-    export function setled(lpin: DigitalPin, lstatus: ledon_off): void {
+    export function setled(lpin: DigitalPin, lstatus: LED_ON_OFF): void {
         pins.digitalWritePin(lpin, lstatus)
     }
 

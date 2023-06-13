@@ -34,10 +34,10 @@ namespace peripheral {
         }
     }
 
-    //% blockId=Microswitch block="Microswitch |digital pin %pin"   group="微型开关"
+    //% blockId=MicroSwitch block="MicroSwitch |digital pin %pin"   group="微型开关"
     //% weight=70
     //% subcategory="基础输入模块"
-    export function Microswitch(pin: DigitalPin): boolean {    
+    export function MicroSwitch(pin: DigitalPin): boolean {    
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {

@@ -1,3 +1,10 @@
+enum ledon_off {
+    //% block="on"
+    _on = 1,
+    //% block="off"
+    _off = 0,
+}
+
 enum EM_DHT11Type {
     //% block="temperature(℃)" 
     EM_DHT11_temperature_C = 0,
@@ -7,12 +14,30 @@ enum EM_DHT11Type {
     EM_DHT11_humidity = 2
 }
 
+enum _rockerpin {
+    //% block="Xpin"
+    Xpin = 0,
+    //% block="Ypin"
+    Ypin = 1
+}
+
 //% color="#FFA500" weight=10 icon="\uf0ca" block="Peripheral:bit"
 namespace peripheral {
     //% blockId=button block="Button |digital pin %pin"   group="按键模块"
     //% weight=70
     //% subcategory="基础输入模块"
     export function Button(pin: DigitalPin): boolean {        
+        if (pins.digitalReadPin(pin) == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //% blockId=microswitch block="microswitch |digital pin %pin"   group="微型开关"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function microswitch(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
@@ -48,6 +73,41 @@ namespace peripheral {
             return true;
         } else {
             return false;
+        }
+    }
+
+    let Xpin = 0
+    let Ypin = 0
+    let Bpin = 0
+    //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
+    //% weight=70
+    //% subcategory="基础输入模块"
+    export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
+        Xpin = pinx
+        Ypin = piny
+        Bpin = pinb
+    }
+
+    //% blockId=_analogRead block="select analog pin  %selectpin" group="摇杆模块"
+    //% weight=69
+    //% subcategory="基础输入模块"
+    export function _analogRead(selectpin: _rockerpin): number {
+        let a
+        if (selectpin == 0)
+            a = Xpin
+        else if (selectpin == 1)
+            a = Ypin
+        return pins.analogReadPin(a)
+    }
+
+    //% blockId=_digitalRead block="Is the rocker module pressed?" group="摇杆模块"
+    //% weight=68
+    //% subcategory="基础输入模块"
+    export function _digitalRead(): boolean {
+        if (pins.digitalReadPin(Bpin) == 1) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -194,6 +254,43 @@ namespace peripheral {
         }
     }
 
+    //% blockId=sensor_temperature block="Pin %pin reads the analog value"  group="温度传感器"
+    //% weight=70
+    //% inlineInputMode=inline
+    //% subcategory="传感器"
+    export function sensor_temperature(pin: AnalogPin): number {
+        let temp = (pins.analogReadPin(pin) / 1023) * 3.3 * 100;
+        return temp
+
+    }
+
+    //% blockId=sensor_hall block="Pin %pin reads the analog value"  group="霍尔传感器"
+    //% weight=70
+    //% inlineInputMode=inline
+    //% subcategory="传感器"
+    export function sensor_hall(pin: AnalogPin): number {
+        return pins.analogReadPin(pin);
+    }
+
+    //% blockId=sensor_tracking block="Pin %pin reads the digital value of the tracking sensor" group="循迹传感器"
+    //% weight=70
+    //% inlineInputMode=inline
+    //% subcategory="传感器"
+    export function sensor_tracking(pin: DigitalPin): boolean {
+        if (pins.digitalReadPin(pin) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //% blockId=setled block="set led %lpin|status %lstatus"   group="LED灯"
+    //% weight=70
+    //% subcategory="显示器"
+    export function setled(lpin: DigitalPin, lstatus: ledon_off): void {
+        pins.digitalWritePin(lpin, lstatus)
+    }
+
     let _Rpins = 0
     let _Gpins = 0
     let _Bpins = 0
@@ -216,5 +313,12 @@ namespace peripheral {
         pins.analogWritePin(_Rpins, r_color)
         pins.analogWritePin(_Gpins, g_color)
         pins.analogWritePin(_Bpins, b_color)
+    }
+
+    //% blockId=actuator_buzzer block="actuator_buzzer pin %pin|freq %freq"   group="蜂鸣器"
+    //% weight=70
+    //% subcategory="执行器"
+    export function actuator_buzzer(pin: AnalogPin, freq: number): void {
+        pins.analogWritePin(pin, freq)
     }
 }

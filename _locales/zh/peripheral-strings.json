@@ -11,7 +11,7 @@
     "peripheral.RockerAnalogRead|block": "摇杆模块%selectpin读取模拟值",
     "peripheral.RockerDigitalRead|block": "摇杆模块按键被按下？",    
     "peripheral.SensorInfrared|block": "红外传感器引脚%pin检测到黑线？",
-    "peripheral.SensorVibration|block": "震动传感器引脚%pin检测到震动(数字值)？",
+    "peripheral.SensorVibration|block": "震动传感器引脚%pin检测到震动？",
     "peripheral.SensorVibrationAnalog|block": "震动传感器引脚%pin读取震动模拟值",
     "peripheral.SensorIllumination|block": "光敏传感器引脚%pin读取光照强度模拟值",
     "EM_DHT11_TYPE.EM_DHT11_HUMIDITY|block": "湿度(0~100)",

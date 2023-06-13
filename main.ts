@@ -136,7 +136,7 @@ namespace peripheral {
     }
 
     //% blockId=SensorVibrationAnalog block="Sensor vibration analog pin |analog %pin" group="震动传感器"
-    //% weight=70
+    //% weight=71
     //% inlineInputMode=inline
     //% subcategory="传感器"
     export function SensorVibrationAnalog(pin: AnalogPin): number {

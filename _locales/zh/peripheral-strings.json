@@ -1,4 +1,17 @@
 {
     "peripheral|block": "Peripheral:bit",
-    "peripheral.Button|block": "按键模块引脚%pin检测到按键被按下？"
+    "peripheral.Button|block": "按键模块引脚%pin检测到按键被按下？",
+    "sensors.crashButton|block": "触碰模块引脚%pin检测到发生碰撞？",
+    "sensors.rotaryPotentiometer|block": "电位器引脚%pin读取模拟值",
+    "sensors.touchButton|block": "触摸模块引脚%pin检测到被触摸？",
+    "sensors.sensor_infrared|block": "红外传感器引脚%pin检测到黑线？",
+    "sensors.sensor_quake|block": "震动传感器引脚%pin检测到震动(数字值)？",
+    "sensors.sensor_quake_analog|block": "震动传感器引脚%pin读取震动模拟值",
+    "sensors.sensor_illumination|block": "光敏传感器引脚%pin读取光照强度模拟值",
+    "EM_DHT11Type.EM_DHT11_humidity|block": "湿度(0~100)",
+    "EM_DHT11Type.EM_DHT11_temperature_C|block": "摄氏温度(℃)",
+    "EM_DHT11Type.EM_DHT11_temperature_F|block": "华氏温度(℉)",
+    "sensors.dht11value|block": "DHT11温湿度传感器引脚%dht11pin |读取 %dht11type",    
+    "sensors.setRGBpin|block": "RGB三色灯红(R)%RPin绿(G)%GPin蓝(B)%YPin",
+    "sensors.selectcolor|block": "RGB三色灯颜色值|红(R)%r_color|绿(G)%g_color|蓝(B)%b_color"
 }

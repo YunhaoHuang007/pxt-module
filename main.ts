@@ -13,7 +13,7 @@ enum DIGITAL_SENSOR {
     //% block="TrackingSensor"
     SENSOR_TRACKING = 0x1,
     //% block="VibrationSensor"
-    SENSOR_VIBRATION = 0x2,
+    SENSOR_VIBRATION = 0x2,    
 }
 
 enum ANALOG_SENSOR {
@@ -44,10 +44,10 @@ enum DHT11_TYPE {
 }
 
 enum ROCKER_PIN {
-    //% block="X_PIN"
-    X_PIN = 0,
-    //% block="Y_PIN"
-    Y_PIN = 1,
+    //% block="ROCKER_PIN_X"
+    ROCKER_PIN_X = 0,
+    //% block="ROCKER_PIN_Y"
+    ROCKER_PIN_Y = 1,
 }
 
 
@@ -93,39 +93,35 @@ namespace Module {
         return value;
     }
 
-    let Xpin = 0
-    let Ypin = 0
-    let Bpin = 0
-    //% blockId=RockerPin block="RockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
-    //% weight=70
     //% subcategory="传感器模块"
-    export function RockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
-        Xpin = pinx
-        Ypin = piny
-        Bpin = pinb
+    //% blockId=SensorTemperature weight=100 blockGap=15
+    //% block="Temperature sensor %pin get the ambient temperature"
+    //% inlineInputMode=inline
+    export function SensorTemperature(pin: AnalogPin): number {
+        let temp = (pins.analogReadPin(pin) / 1023) * 3.3 * 100;
+        return temp;
     }
 
-    //% blockId=RockerAnalogRead block="Select rocker analog pin  %selectpin" group="摇杆模块"
-    //% weight=69
-    //% subcategory="传感器模块"
+    let rockerPinX = 0;
+    let rockerPinY = 0;
+    //% subcategory="传感器模块" group="摇杆模块"
+    //% blockId=RockerPin weight=81
+    //block="RockerPin setup | pinX %pinx|pinY %piny"
+    export function RockerPin(pinx: AnalogPin, piny: AnalogPin): void {
+        rockerPinX = pinx;
+        rockerPinY = piny;
+    }
+
+    //% subcategory="传感器模块" group="摇杆模块"
+    //% blockId=RockerAnalogRead  weight=80
+    //% block="Get rocker analog pin  %selectpin value"
     export function RockerAnalogRead(selectpin: ROCKER_PIN): number {
-        let a
-        if (selectpin == ROCKER_PIN.X_PIN)
-            a = Xpin
-        else if (selectpin == ROCKER_PIN.Y_PIN)
-            a = Ypin
-        return pins.analogReadPin(a)
-    }
-
-    //% blockId=RockerDigitalRead block="Is the rocker module pressed?" group="摇杆模块"
-    //% weight=68
-    //% subcategory="传感器模块"
-    export function RockerDigitalRead(): boolean {
-        if (pins.digitalReadPin(Bpin) == 1) {
-            return false;
-        } else {
-            return true;
-        }
+        let pinSelect;
+        if (selectpin == ROCKER_PIN.ROCKER_PIN_X)
+            pinSelect = rockerPinX;
+        else if (selectpin == ROCKER_PIN.ROCKER_PIN_Y)
+            pinSelect = rockerPinY;
+        return pins.analogReadPin(pinSelect);
     }
 
     let dht11Temperature = 0;
@@ -229,15 +225,6 @@ namespace Module {
             case DHT11_TYPE.DHT11_HUMIDITY:
                 return dht11Humidity
         }
-    }
-
-    //% blockId=SensorTemperature block="Pin %pin reads the analog value"  group="温度传感器"
-    //% weight=70
-    //% inlineInputMode=inline
-    //% subcategory="传感器模块"
-    export function SensorTemperature(pin: AnalogPin): number {
-        let temp = (pins.analogReadPin(pin) / 1023) * 3.3 * 100;
-        return temp
     }
 
     //% blockId=SetLED block="Set LED %lpin|status %lstatus"   group="LED灯"

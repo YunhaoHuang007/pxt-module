@@ -26,7 +26,7 @@
     "LED_ON_OFF.LED_ON|block": "点亮",
     "LED_ON_OFF.LED_OFF|block": "熄灭",
     "Module.SetLED|block": "LED灯引脚%lpin|状态%lstatus",
-    "Module.SetRGBpin|block": "RGB三色灯红(R)%RPin绿(G)%GPin蓝(B)%YPin",
+    "Module.SetRGBpin|block": "RGB三色灯红(R)%Rpin绿(G)%Gpin蓝(B)%Bpin",    
     "Module.SelectColor|block": "RGB三色灯颜色值|红(R)%r_color|绿(G)%g_color|蓝(B)%b_color",
     "Module.ActuatorBuzzer|block": "蜂鸣器引脚%pin频率%freqHz"
 }

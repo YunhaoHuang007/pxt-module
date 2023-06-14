@@ -228,39 +228,39 @@ namespace Module {
     }
 
     //% subcategory="输出模块"
-    //% blockId=SetLED  weight=80 blockGap=15
+    //% blockId=SetLED weight=80 blockGap=15
     //% block="Set LED %lpin|status %lstatus"    
     export function SetLED(lpin: DigitalPin, lstatus: LED_ON_OFF): void {
         pins.digitalWritePin(lpin, lstatus)
     }
 
-    let _Rpins = 0
-    let _Gpins = 0
-    let _Bpins = 0
-    //% blockId=SetRGBpin block="Set RGBlight pin|r %_RPin|g %_GPin|b %_BPin"   group="三色灯"
-    //% weight=71
+    let pinR = 0
+    let pinG = 0
+    let pinB = 0
     //% subcategory="输出模块"
-    export function SetRGBpin(_GPin: AnalogPin, _BPin: AnalogPin, _RPin: AnalogPin): void {
-        _Gpins = _GPin
-        _Bpins = _BPin
-        _Rpins = _RPin
+    //% blockId=SetRGBpin weight=79 blockGap=15
+    //% block="Set RGB pin|R %Rpin|G %Gpin|B %Bpin"
+    export function SetRGBpin(Rpin: AnalogPin, Gpin: AnalogPin, Bpin: AnalogPin): void {
+        pinR = Rpin;
+        pinG = Gpin;
+        pinB = Bpin;
     }
 
-    //% blockId=SelectColor block="Set color pin|r_color %r_color|g_color %g_color|b_color %b_color"   group="三色灯"
+    //% subcategory="输出模块"
+    //% blockId=SelectColor weight=78 blockGap=15
     //% r_color.min=0  r_color.max=255
     //% g_color.min=0  g_color.max=255
     //% b_color.min=0  b_color.max=255
-    //% weight=70
-    //% subcategory="输出模块"
+    //% block="Set color value|r_color %r_color|g_color %g_color|b_color %b_color"
     export function SelectColor(r_color: number, g_color: number, b_color: number): void {
-        pins.analogWritePin(_Rpins, r_color)
-        pins.analogWritePin(_Gpins, g_color)
-        pins.analogWritePin(_Bpins, b_color)
+        pins.analogWritePin(pinR, r_color)
+        pins.analogWritePin(pinG, g_color)
+        pins.analogWritePin(pinB, b_color)
     }
 
-    //% blockId=ActuatorBuzzer block="Buzzer pin %pin|freq %freq"   group="蜂鸣器"
-    //% weight=70
     //% subcategory="输出模块"
+    //% blockId=ActuatorBuzzer weight=77 blockGap=15
+    //% block="Buzzer pin %pin|freq %freq"
     export function ActuatorBuzzer(pin: AnalogPin, freq: number): void {
         pins.analogWritePin(pin, freq)
     }

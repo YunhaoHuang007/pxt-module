@@ -12,6 +12,7 @@
     "ANALOG_SENSOR.POTENTIOMETER|block": "电位器模块",
     "ANALOG_SENSOR.SENSOR_ILLUMINATION|block": "光敏传感器",
     "ANALOG_SENSOR.SENSOR_HALL|block": "霍尔传感器",
+    "ANALOG_SENSOR.SENSOR_VIBRATION|block": "震动传感器",
     "Module.AnalogSensor|block": "传感器%asensor连接到引脚%pin",
     "Module.CrashButton|block": "触碰模块引脚%pin检测到发生碰撞？",
     "Module.TouchButton|block": "触摸模块引脚%pin检测到被触摸？",

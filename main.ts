@@ -23,6 +23,8 @@ enum ANALOG_SENSOR {
     SENSOR_ILLUMINATION = 0x1,
     //% block="HallSensor"
     SENSOR_HALL = 0x2,
+    //% block="VibrationSensor"
+    SENSOR_VIBRATION = 0x3,
 }
 
 enum LED_ON_OFF {
@@ -124,14 +126,6 @@ namespace Module {
         } else {
             return true;
         }
-    }
-
-    //% blockId=SensorVibrationAnalog block="Sensor vibration analog pin |analog %pin" group="震动传感器"
-    //% weight=70
-    //% inlineInputMode=inline
-    //% subcategory="传感器模块"
-    export function SensorVibrationAnalog(pin: AnalogPin): number {
-        return pins.analogReadPin(pin)
     }
 
     let dht11Temperature = 0;

@@ -1,7 +1,10 @@
 {
     "Module|block": "Module",
-    "Module.Button|block": "按键模块引脚%pin检测到按键被按下？",
-    "Module.MicroSwitch|block": "微型开关引脚%pin检测到开关被按下？",
+    "SWITCH_MODULE.BUTTON|block": "按键开关",
+    "SWITCH_MODULE.MICROSWITCH|block": "微型开关",
+    "SWITCH_MODULE.TOUCHBUTTON|block": "触摸开关",
+    "Module.SwitchModuleConnect|block": "开关模块%swtm连接到引脚%pin",
+    "Module.SwitchButton|block": "开关是否被按下？",
     "Module.CrashButton|block": "触碰模块引脚%pin检测到发生碰撞？",
     "Module.Potentiometer|block": "电位器引脚%pin读取模拟值",
     "Module.TouchButton|block": "触摸模块引脚%pin检测到被触摸？",

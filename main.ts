@@ -21,38 +21,37 @@ enum ROCKER_PIN {
     Y_PIN = 1
 }
 
+enum SWITCH_MODULE {
+    //% block="Button"
+    BUTTON = 0x0,
+    //% block="MicroSwitch"
+    MICROSWITCH = 0x1,
+    //% block="TouchButton"
+    TOUCHBUTTON = 0x2
+}
+
 //% color="#6167d5" weight=10 icon="\uf0ca" block="Module"
 namespace Module {
-    //% blockId=Button block="Button |digital pin %pin"   group="按键开关"
-    //% weight=70
+    let switchPin = 0;
+    let switchModule = 0;
     //% subcategory="开关模块"
-    export function Button(pin: DigitalPin): boolean {        
-        if (pins.digitalReadPin(pin) == 1) {
-            return false;
-        } else {
-            return true;
-        }
+    //% blockId=ButtonModule weight=101 blockGap=15
+    //% block="Module %swtm | connect to pin %pin"
+    //% aimPin.fieldEditor="list"
+    //% aim.fieldEditor="list"
+    export function SwitchModuleConnect(pin: DigitalPin, swtm: SWITCH_MODULE): void {
+        switchPin = pin;
+        switchModule = swtm;
     }
 
-    //% blockId=MicroSwitch block="MicroSwitch |digital pin %pin"   group="微型开关"
-    //% weight=70
     //% subcategory="开关模块"
-    export function MicroSwitch(pin: DigitalPin): boolean {    
-        if (pins.digitalReadPin(pin) == 1) {
+    //% blockId=SwitchButton weight=100
+    //% block="Is the switch pressed?"
+    export function SwitchButton(): boolean {
+        if (pins.digitalReadPin(switchPin) == 1) {
             return false;
         } else {
             return true;
-        }
-    }
-
-    //% blockId=TouchButton block="TouchButton |digital pin %pin"   group="触摸开关"
-    //% weight=70
-    //% subcategory="开关模块"
-    export function TouchButton(pin: DigitalPin): boolean {
-        if (pins.digitalReadPin(pin) == 1) {
-            return true;
-        } else {
-            return false;
         }
     }
 

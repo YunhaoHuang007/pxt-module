@@ -227,9 +227,9 @@ namespace Module {
         }
     }
 
-    //% blockId=SetLED block="Set LED %lpin|status %lstatus"   group="LED灯"
-    //% weight=70
     //% subcategory="输出模块"
+    //% blockId=SetLED  weight=80 blockGap=15
+    //% block="Set LED %lpin|status %lstatus"    
     export function SetLED(lpin: DigitalPin, lstatus: LED_ON_OFF): void {
         pins.digitalWritePin(lpin, lstatus)
     }

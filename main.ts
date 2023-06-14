@@ -23,9 +23,9 @@ enum ROCKER_PIN {
 
 //% color="#FFA500" weight=10 icon="\uf0ca" block="Peripheral:bit"
 namespace peripheral {
-    //% blockId=Button block="Button |digital pin %pin"   group="按键模块"
+    //% blockId=Button block="Button |digital pin %pin"   group="按键开关"
     //% weight=70
-    //% subcategory="基础输入模块"
+    //% subcategory="开关模块"
     export function Button(pin: DigitalPin): boolean {        
         if (pins.digitalReadPin(pin) == 1) {
             return false;
@@ -36,7 +36,7 @@ namespace peripheral {
 
     //% blockId=MicroSwitch block="MicroSwitch |digital pin %pin"   group="微型开关"
     //% weight=70
-    //% subcategory="基础输入模块"
+    //% subcategory="开关模块"
     export function MicroSwitch(pin: DigitalPin): boolean {    
         if (pins.digitalReadPin(pin) == 1) {
             return false;
@@ -45,9 +45,20 @@ namespace peripheral {
         }
     }
 
-    //% blockId=CrashButton block="CrashButton |digital pin %pin"   group="触碰模块"
+    //% blockId=TouchButton block="TouchButton |digital pin %pin"   group="触摸开关"
     //% weight=70
-    //% subcategory="基础输入模块"
+    //% subcategory="开关模块"
+    export function TouchButton(pin: DigitalPin): boolean {
+        if (pins.digitalReadPin(pin) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //% blockId=CrashButton block="CrashButton |digital pin %pin"   group="触碰检测模块"
+    //% weight=70
+    //% subcategory="数据采集模块"
     export function CrashButton(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
             return false;
@@ -58,22 +69,11 @@ namespace peripheral {
 
     //% blockId=Potentiometer block="Potentiometer |analog pin %pin" group="电位器模块"
     //% weight=70
-    //% subcategory="基础输入模块"
+    //% subcategory="数据采集模块"
     export function Potentiometer(pin: AnalogPin): number {
         let row = pins.analogReadPin(pin)
         return row
 
-    }
-
-    //% blockId=TouchButton block="TouchButton |digital pin %pin"   group="触摸模块"
-    //% weight=70
-    //% subcategory="基础输入模块"
-    export function TouchButton(pin: DigitalPin): boolean {        
-        if (pins.digitalReadPin(pin) == 1) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     let Xpin = 0
@@ -81,7 +81,7 @@ namespace peripheral {
     let Bpin = 0
     //% blockId=RockerPin block="RockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
     //% weight=70
-    //% subcategory="基础输入模块"
+    //% subcategory="数据采集模块"
     export function RockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
         Xpin = pinx
         Ypin = piny
@@ -90,7 +90,7 @@ namespace peripheral {
 
     //% blockId=RockerAnalogRead block="Select rocker analog pin  %selectpin" group="摇杆模块"
     //% weight=69
-    //% subcategory="基础输入模块"
+    //% subcategory="数据采集模块"
     export function RockerAnalogRead(selectpin: ROCKER_PIN): number {
         let a
         if (selectpin == ROCKER_PIN.X_PIN)
@@ -102,7 +102,7 @@ namespace peripheral {
 
     //% blockId=RockerDigitalRead block="Is the rocker module pressed?" group="摇杆模块"
     //% weight=68
-    //% subcategory="基础输入模块"
+    //% subcategory="数据采集模块"
     export function RockerDigitalRead(): boolean {
         if (pins.digitalReadPin(Bpin) == 1) {
             return false;
@@ -114,7 +114,7 @@ namespace peripheral {
     //% blockId=SensorInfrared block="Pin %pin reads the digital value of the infrared sensor" group="红外传感器"
     //% weight=70
     //% inlineInputMode=inline
-    //% subcategory="传感器"
+    //% subcategory="数据采集模块"
     export function SensorInfrared(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
             return true;
@@ -126,7 +126,7 @@ namespace peripheral {
     //% blockId=SensorVibration block="Sensor vibration pin |digitalpin %pin" group="震动传感器"
     //% weight=71
     //% inlineInputMode=inline
-    //% subcategory="传感器"
+    //% subcategory="数据采集模块"
     export function SensorVibration(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
             return false;
@@ -138,7 +138,7 @@ namespace peripheral {
     //% blockId=SensorVibrationAnalog block="Sensor vibration analog pin |analog %pin" group="震动传感器"
     //% weight=70
     //% inlineInputMode=inline
-    //% subcategory="传感器"
+    //% subcategory="数据采集模块"
     export function SensorVibrationAnalog(pin: AnalogPin): number {
         return pins.analogReadPin(pin)
     }
@@ -146,7 +146,7 @@ namespace peripheral {
     //% blockId=SensorIllumination block="Sensor illumination pin |analogpin %pin" group="光敏传感器"
     //% weight=70
     //% inlineInputMode=inline
-    //% subcategory="传感器"
+    //% subcategory="数据采集模块"
     export function SensorIllumination(pin: AnalogPin): number {
         return pins.analogReadPin(pin)
     }
@@ -154,7 +154,7 @@ namespace peripheral {
     let em_dht11Temperature = 0;
     let em_dht11Humidity = 0;
     //% blockId=DHT11Value block="Value of DHT11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
-    //% subcategory="传感器"
+    //% subcategory="数据采集模块"
     //% inlineInputMode=inline
     //% weight=72
     export function DHT11Value(dht11pin: DigitalPin, dht11type: EM_DHT11_TYPE): number {
@@ -257,7 +257,7 @@ namespace peripheral {
     //% blockId=SensorTemperature block="Pin %pin reads the analog value"  group="温度传感器"
     //% weight=70
     //% inlineInputMode=inline
-    //% subcategory="传感器"
+    //% subcategory="数据采集模块"
     export function SensorTemperature(pin: AnalogPin): number {
         let temp = (pins.analogReadPin(pin) / 1023) * 3.3 * 100;
         return temp
@@ -266,7 +266,7 @@ namespace peripheral {
     //% blockId=SensorHall block="Pin %pin reads the analog value"  group="霍尔传感器"
     //% weight=70
     //% inlineInputMode=inline
-    //% subcategory="传感器"
+    //% subcategory="数据采集模块"
     export function SensorHall(pin: AnalogPin): number {
         return pins.analogReadPin(pin);
     }
@@ -274,7 +274,7 @@ namespace peripheral {
     //% blockId=SensorTracking block="Pin %pin reads the digital value of the tracking sensor" group="循迹传感器"
     //% weight=70
     //% inlineInputMode=inline
-    //% subcategory="传感器"
+    //% subcategory="数据采集模块"
     export function SensorTracking(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
             return true;
@@ -285,7 +285,7 @@ namespace peripheral {
 
     //% blockId=SetLED block="Set LED %lpin|status %lstatus"   group="LED灯"
     //% weight=70
-    //% subcategory="显示器"
+    //% subcategory="输出模块"
     export function SetLED(lpin: DigitalPin, lstatus: LED_ON_OFF): void {
         pins.digitalWritePin(lpin, lstatus)
     }
@@ -295,7 +295,7 @@ namespace peripheral {
     let _Bpins = 0
     //% blockId=SetRGBpin block="Set RGBlight pin|r %_RPin|g %_GPin|b %_BPin"   group="三色灯"
     //% weight=71
-    //% subcategory="显示器"
+    //% subcategory="输出模块"
     export function SetRGBpin(_GPin: AnalogPin, _BPin: AnalogPin, _RPin: AnalogPin): void {
         _Gpins = _GPin
         _Bpins = _BPin
@@ -307,7 +307,7 @@ namespace peripheral {
     //% g_color.min=0  g_color.max=255
     //% b_color.min=0  b_color.max=255
     //% weight=70
-    //% subcategory="显示器"
+    //% subcategory="输出模块"
     export function SelectColor(r_color: number, g_color: number, b_color: number): void {
         pins.analogWritePin(_Rpins, r_color)
         pins.analogWritePin(_Gpins, g_color)
@@ -316,7 +316,7 @@ namespace peripheral {
 
     //% blockId=ActuatorBuzzer block="Buzzer pin %pin|freq %freq"   group="蜂鸣器"
     //% weight=70
-    //% subcategory="执行器"
+    //% subcategory="输出模块"
     export function ActuatorBuzzer(pin: AnalogPin, freq: number): void {
         pins.analogWritePin(pin, freq)
     }

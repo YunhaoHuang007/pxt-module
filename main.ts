@@ -106,14 +106,14 @@ namespace Module {
     let rockerPinY = 0;
     //% subcategory="传感器模块"
     //% blockId=RockerPin weight=95 blockGap=15
-    //block="RockerPin setup | pinX %pinx|pinY %piny"
+    //% block="RockerPin setup | pinX %pinx|pinY %piny"
     export function RockerPin(pinx: AnalogPin, piny: AnalogPin): void {
         rockerPinX = pinx;
         rockerPinY = piny;
     }
 
     //% subcategory="传感器模块"
-    //% blockId=RockerAnalogRead  weight=94 blockGap=15
+    //% blockId=RockerAnalogRead weight=94 blockGap=15
     //% block="Get rocker analog pin  %selectpin value"
     export function RockerAnalogRead(selectpin: ROCKER_PIN): number {
         let pinSelect;
@@ -126,10 +126,10 @@ namespace Module {
 
     let dht11Temperature = 0;
     let dht11Humidity = 0;
-    //% blockId=DHT11Value block="Value of DHT11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
     //% subcategory="传感器模块"
-    //% inlineInputMode=inline
-    //% weight=72
+    //% blockId=DHT11Value weight=93 blockGap=15
+    //% block="Value of DHT11 %dht11type at pin %dht11pin"
+    //% inlineInputMode=inline    
     export function DHT11Value(dht11pin: DigitalPin, dht11type: DHT11_TYPE): number {
         const DHT11_TIMEOUT = 100
         const buffer = pins.createBuffer(40)

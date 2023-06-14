@@ -39,7 +39,7 @@ namespace Module {
     //% block="Module %swtm | connect to pin %pin"
     //% aimPin.fieldEditor="list"
     //% aim.fieldEditor="list"
-    export function SwitchModuleConnect(pin: DigitalPin, swtm: SWITCH_MODULE): void {
+    export function SwitchModuleConnect(swtm: SWITCH_MODULE, pin: DigitalPin): void {
         switchPin = pin;
         switchModule = swtm;
     }

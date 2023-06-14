@@ -56,7 +56,7 @@ namespace Module {
     let switchPin = 0;
     let switchModule = 0;
     //% subcategory="开关模块"
-    //% blockId=ButtonModule weight=101 blockGap=15
+    //% blockId=ButtonModule weight=100 blockGap=15
     //% block="Module %swtm | connect to pin %pin"    
     export function SwitchModuleConnect(swtm: SWITCH_MODULE, pin: DigitalPin): void {
         switchModule = swtm;
@@ -64,7 +64,7 @@ namespace Module {
     }
 
     //% subcategory="开关模块"
-    //% blockId=SwitchButton weight=100 blockGap=15
+    //% blockId=SwitchButton weight=99 blockGap=15
     //% block="Is the switch pressed?"
     export function SwitchButton(): boolean {
         if (pins.digitalReadPin(switchPin) == 1) {
@@ -75,7 +75,7 @@ namespace Module {
     }
 
     //% subcategory="传感器模块"
-    //% blockId=DigitalSensor weight=100 blockGap=15
+    //% blockId=DigitalSensor weight=98 blockGap=15
     //% block="Sensor %dsensor | connect to pin %pin"
     export function DigitalSensor(dsensor: DIGITAL_SENSOR, pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
@@ -86,7 +86,7 @@ namespace Module {
     }
 
     //% subcategory="传感器模块"
-    //% blockId=AnalogSensor weight=100 blockGap=15
+    //% blockId=AnalogSensor weight=97 blockGap=15
     //% block="Sensor %asensor | connect to pin %pin"
     export function AnalogSensor(asensor: ANALOG_SENSOR, pin: AnalogPin): number {
         let value = pins.analogReadPin(pin);
@@ -94,7 +94,7 @@ namespace Module {
     }
 
     //% subcategory="传感器模块"
-    //% blockId=SensorTemperature weight=100 blockGap=15
+    //% blockId=SensorTemperature weight=96 blockGap=15
     //% block="Temperature sensor %pin get the ambient temperature"
     //% inlineInputMode=inline
     export function SensorTemperature(pin: AnalogPin): number {
@@ -104,16 +104,16 @@ namespace Module {
 
     let rockerPinX = 0;
     let rockerPinY = 0;
-    //% subcategory="传感器模块" group="摇杆模块"
-    //% blockId=RockerPin weight=81
+    //% subcategory="传感器模块"
+    //% blockId=RockerPin weight=95 blockGap=15
     //block="RockerPin setup | pinX %pinx|pinY %piny"
     export function RockerPin(pinx: AnalogPin, piny: AnalogPin): void {
         rockerPinX = pinx;
         rockerPinY = piny;
     }
 
-    //% subcategory="传感器模块" group="摇杆模块"
-    //% blockId=RockerAnalogRead  weight=80
+    //% subcategory="传感器模块"
+    //% blockId=RockerAnalogRead  weight=94 blockGap=15
     //% block="Get rocker analog pin  %selectpin value"
     export function RockerAnalogRead(selectpin: ROCKER_PIN): number {
         let pinSelect;

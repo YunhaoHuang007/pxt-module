@@ -21,7 +21,7 @@ enum ROCKER_PIN {
     Y_PIN = 1
 }
 
-//% color="#3C157A" weight=10 icon="\uf0ca" block="Peripheral:bit"
+//% color="#6167d5" weight=10 icon="\uf0ca" block="Peripheral:bit"
 namespace peripheral {
     //% blockId=Button block="Button |digital pin %pin"   group="按键开关"
     //% weight=70

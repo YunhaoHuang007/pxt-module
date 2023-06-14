@@ -1,26 +1,3 @@
-enum LED_ON_OFF {
-    //% block="ON"
-    LED_ON = 1,
-    //% block="OFF"
-    LED_OFF = 0,
-}
-
-enum EM_DHT11_TYPE {
-    //% block="Temperature(℃)" 
-    EM_DHT11_TEMPERATURE_C = 0,
-    //% block="Temperature(℉)"
-    EM_DHT11_TEMPERATURE_F = 1,
-    //% block="Humidity(0~100)"
-    EM_DHT11_HUMIDITY = 2
-}
-
-enum ROCKER_PIN {
-    //% block="X_PIN"
-    X_PIN = 0,
-    //% block="Y_PIN"
-    Y_PIN = 1
-}
-
 enum SWITCH_MODULE {
     //% block="Button"
     BUTTON = 0x0,
@@ -30,22 +7,51 @@ enum SWITCH_MODULE {
     TOUCHBUTTON = 0x2
 }
 
+enum DIGITAL_SENSOR {
+    //% block="InfraredSensor"
+    SENSOR_INFRARED = 0x0,
+    //% block="TrackingSensor"
+    SENSOR_TRACKING = 0x1
+}
+
+enum LED_ON_OFF {
+    //% block="ON"
+    LED_ON = 1,
+    //% block="OFF"
+    LED_OFF = 0,
+}
+
+enum DHT11_TYPE {
+    //% block="Temperature(℃)" 
+    DHT11_TEMPERATURE_C = 0,
+    //% block="Temperature(℉)"
+    DHT11_TEMPERATURE_F = 1,
+    //% block="Humidity(0~100%)"
+    DHT11_HUMIDITY = 2
+}
+
+enum ROCKER_PIN {
+    //% block="X_PIN"
+    X_PIN = 0,
+    //% block="Y_PIN"
+    Y_PIN = 1
+}
+
+
 //% color="#6167d5" weight=10 icon="\uf0ca" block="Module"
 namespace Module {
     let switchPin = 0;
     let switchModule = 0;
     //% subcategory="开关模块"
     //% blockId=ButtonModule weight=101 blockGap=15
-    //% block="Module %swtm | connect to pin %pin"
-    //% aimPin.fieldEditor="list"
-    //% aim.fieldEditor="list"
+    //% block="Module %swtm | connect to pin %pin"    
     export function SwitchModuleConnect(swtm: SWITCH_MODULE, pin: DigitalPin): void {
-        switchPin = pin;
         switchModule = swtm;
+        switchPin = pin;
     }
 
     //% subcategory="开关模块"
-    //% blockId=SwitchButton weight=100
+    //% blockId=SwitchButton weight=100 blockGap=15
     //% block="Is the switch pressed?"
     export function SwitchButton(): boolean {
         if (pins.digitalReadPin(switchPin) == 1) {
@@ -55,14 +61,38 @@ namespace Module {
         }
     }
 
-    //% blockId=CrashButton block="CrashButton |digital pin %pin"   group="触碰检测模块"
-    //% weight=70
     //% subcategory="传感器模块"
-    export function CrashButton(pin: DigitalPin): boolean {
+    //% blockId=DigitalSensorConnect weight=100 blockGap=15
+    //% block="Sensor %dsensor | connect to pin %pin"
+    export function DigitalSensor(dsensor: DIGITAL_SENSOR, pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
             return true;
+        }
+    }
+
+    //% blockId=SensorInfrared block="Pin %pin reads the digital value of the infrared sensor" group="红外传感器"
+    //% weight=70
+    //% inlineInputMode=inline
+    //% subcategory="传感器模块"
+    export function SensorInfrared(pin: DigitalPin): boolean {
+        if (pins.digitalReadPin(pin) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //% blockId=SensorTracking block="Pin %pin reads the digital value of the tracking sensor" group="循迹传感器"
+    //% weight=70
+    //% inlineInputMode=inline
+    //% subcategory="传感器模块"
+    export function SensorTracking(pin: DigitalPin): boolean {
+        if (pins.digitalReadPin(pin) == 1) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -72,7 +102,6 @@ namespace Module {
     export function Potentiometer(pin: AnalogPin): number {
         let row = pins.analogReadPin(pin)
         return row
-
     }
 
     let Xpin = 0
@@ -110,18 +139,6 @@ namespace Module {
         }
     }
 
-    //% blockId=SensorInfrared block="Pin %pin reads the digital value of the infrared sensor" group="红外传感器"
-    //% weight=70
-    //% inlineInputMode=inline
-    //% subcategory="传感器模块"
-    export function SensorInfrared(pin: DigitalPin): boolean {
-        if (pins.digitalReadPin(pin) == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     //% blockId=SensorVibration block="Sensor vibration pin |digitalpin %pin" group="震动传感器"
     //% weight=71
     //% inlineInputMode=inline
@@ -150,13 +167,13 @@ namespace Module {
         return pins.analogReadPin(pin)
     }
 
-    let em_dht11Temperature = 0;
-    let em_dht11Humidity = 0;
+    let dht11Temperature = 0;
+    let dht11Humidity = 0;
     //% blockId=DHT11Value block="Value of DHT11 %dht11type at pin %dht11pin"  group="DHT11温湿度传感器"
     //% subcategory="传感器模块"
     //% inlineInputMode=inline
     //% weight=72
-    export function DHT11Value(dht11pin: DigitalPin, dht11type: EM_DHT11_TYPE): number {
+    export function DHT11Value(dht11pin: DigitalPin, dht11type: DHT11_TYPE): number {
         const DHT11_TIMEOUT = 100
         const buffer = pins.createBuffer(40)
         const data = [0, 0, 0, 0, 0]
@@ -239,17 +256,17 @@ namespace Module {
         }
 
         if (((data[0] + data[1] + data[2] + data[3]) & 0xff) === data[4]) {
-            em_dht11Humidity = data[0] + data[1] * 0.1
-            em_dht11Temperature = data[2] + data[3] * 0.1
+            dht11Humidity = data[0] + data[1] * 0.1
+            dht11Temperature = data[2] + data[3] * 0.1
         }
 
         switch (dht11type) {
-            case EM_DHT11_TYPE.EM_DHT11_TEMPERATURE_C:
-                return em_dht11Temperature
-            case EM_DHT11_TYPE.EM_DHT11_TEMPERATURE_F:
-                return (em_dht11Temperature * 1.8) + 32
-            case EM_DHT11_TYPE.EM_DHT11_HUMIDITY:
-                return em_dht11Humidity
+            case DHT11_TYPE.DHT11_TEMPERATURE_C:
+                return dht11Temperature
+            case DHT11_TYPE.DHT11_TEMPERATURE_F:
+                return (dht11Temperature * 1.8) + 32
+            case DHT11_TYPE.DHT11_HUMIDITY:
+                return dht11Humidity
         }
     }
 
@@ -270,17 +287,7 @@ namespace Module {
         return pins.analogReadPin(pin);
     }
 
-    //% blockId=SensorTracking block="Pin %pin reads the digital value of the tracking sensor" group="循迹传感器"
-    //% weight=70
-    //% inlineInputMode=inline
-    //% subcategory="传感器模块"
-    export function SensorTracking(pin: DigitalPin): boolean {
-        if (pins.digitalReadPin(pin) == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 
     //% blockId=SetLED block="Set LED %lpin|status %lstatus"   group="LED灯"
     //% weight=70

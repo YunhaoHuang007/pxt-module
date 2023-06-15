@@ -270,11 +270,11 @@ namespace Module {
     let _intensity = 3
     let dbuf = [0, 0, 0, 0]
 
-    function SendCmd(cmd: number) {
+    function TM1650SendCmd(cmd: number) {
         pins.i2cWriteNumber(I2C_ADDRESS_CMD, cmd, NumberFormat.Int8BE)
     }
 
-    function SendData(bit: number, data: number) {
+    function TM1650SendData(bit: number, data: number) {
         pins.i2cWriteNumber(I2C_ADDRESS_DIS + (bit % 4), data, NumberFormat.Int8BE)
     }
 
@@ -283,17 +283,17 @@ namespace Module {
     //% block="display control"
     function TM1650Control(cmd: TM1650_OPT) {
         if (cmd == 0) {
-            SendCmd(_intensity * 16 + 1)
+            TM1650SendCmd(_intensity * 16 + 1)
         }
         if (cmd == 1) {
             _intensity = 0
-            SendCmd(0)
+            TM1650SendCmd(0)
         }
         if (cmd == 2) {
-            SendData(0, 0)
-            SendData(1, 0)
-            SendData(2, 0)
-            SendData(3, 0)
+            TM1650SendData(0, 0)
+            TM1650SendData(1, 0)
+            TM1650SendData(2, 0)
+            TM1650SendData(3, 0)
             dbuf = [0, 0, 0, 0]
         }
     }
@@ -305,7 +305,7 @@ namespace Module {
     //% bit.max=3 bit.min=0
     export function TM1650Digit(bit: number, num: number) {
         dbuf[bit % 4] = _SEG[num % 16]
-        SendData(bit, _SEG[num % 16])
+        TM1650SendData(bit, _SEG[num % 16])
     }
 
     //% subcategory="输出模块" group="TM1650数码管"
@@ -313,7 +313,7 @@ namespace Module {
     //% block="show number %num"
     export function TM1650ShowNumber(num: number) {
         if (num < 0) {
-            SendData(0, 0x40) // '-'
+            TM1650SendData(0, 0x40) // '-'
             num = -num
         }
         else
@@ -328,7 +328,7 @@ namespace Module {
     //% blockId="TM1650ShowHex" weight=90 blockGap=8
     export function TM1650ShowHex(num: number) {
         if (num < 0) {
-            SendData(0, 0x40) // '-'
+            TM1650SendData(0, 0x40) // '-'
             num = -num
         }
         else
@@ -344,8 +344,8 @@ namespace Module {
     //% bit.max=3 bit.min=0
     export function TM1650ShowDp(bit: number, status: LED_ON_OFF) {
         let show = status == 1 ? true : false;
-        if (show) SendData(bit, dbuf[bit % 4] | 0x80)
-        else SendData(bit, dbuf[bit % 4] & 0x7F)
+        if (show) TM1650SendData(bit, dbuf[bit % 4] | 0x80)
+        else TM1650SendData(bit, dbuf[bit % 4] & 0x7F)
     }
 
     //% subcategory="输出模块" group="TM1650数码管"
@@ -358,11 +358,11 @@ namespace Module {
         }
         if (value == 0) {
             _intensity = 0
-            SendCmd(0)
+            TM1650SendCmd(0)
         }
         else {
             _intensity = value
-            SendCmd((value << 4) | 0x01)
+            TM1650SendCmd((value << 4) | 0x01)
         }
     }
 }

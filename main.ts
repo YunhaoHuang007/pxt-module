@@ -26,7 +26,7 @@ enum ROCKER_PIN {
 namespace Module {
     let switchPin = 0;
     let switchModule = 0;
-    //% subcategory="开关模块"
+    //% subcategory="传感器模块"
     //% blockId=SwitchModuleButton weight=100 blockGap=15
     //% block="Switch module button pin %pin detected button pressed?"
     export function SwitchModuleButton(pin: DigitalPin): boolean {
@@ -37,7 +37,7 @@ namespace Module {
         }
     }
 
-    //% subcategory="开关模块"
+    //% subcategory="传感器模块"
     //% blockId=Microswitch weight=99 blockGap=15
     //% block="Microswitch pin %pin detected switch pressed?"
     export function Microswitch(pin: DigitalPin): boolean {
@@ -48,7 +48,7 @@ namespace Module {
         }
     }
 
-    //% subcategory="开关模块"
+    //% subcategory="传感器模块"
     //% blockId=TouchButton weight=98 blockGap=15
     //% block="TouchButton pin %pin detected button pressed?"
     export function TouchButton(pin: DigitalPin): boolean {

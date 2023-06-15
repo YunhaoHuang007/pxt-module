@@ -6,7 +6,7 @@ enum LED_ON_OFF {
 }
 
 enum DHT11_TYPE {
-    //% block="Temperature(℃)" 
+    //% block="Temperature(℃)"
     DHT11_TEMPERATURE_C = 0,
     //% block="Temperature(℉)"
     DHT11_TEMPERATURE_F = 1,
@@ -21,6 +21,14 @@ enum ROCKER_PIN {
     ROCKER_PIN_Y = 1,
 }
 
+enum TM1650_OPT {
+    //% block="TM1650_ON"
+    TM1650_ON = 0,
+    //% block="TM1650_OFF"
+    TM1650_OFF = 1,
+    //% block="TM1650_CLEAR"
+    TM1650_CLEAR = 2,
+}
 
 //% color="#6167d5" weight=10 icon="\uf0ca" block="Module"
 namespace Module {
@@ -63,6 +71,17 @@ namespace Module {
     //% blockId=TrackingSensor weight=79 blockGap=15
     //% block="Tracking sensor pin %pin black line detected?"
     export function TrackingSensor(pin: DigitalPin): boolean {
+        if (pins.digitalReadPin(pin) == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //% subcategory="传感器模块"
+    //% blockId=HumanbodySensor weight=78 blockGap=15
+    //% block="Humanbody sensor %pin humanbody detected?"
+    export function HumanbodySensor(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
@@ -152,78 +171,33 @@ namespace Module {
     //% subcategory="传感器模块"
     //% blockId=DHT11Value weight=69 blockGap=15
     //% block="Value of DHT11 %dht11type at pin %dht11pin"
-    //% inlineInputMode=inline    
+    //% inlineInputMode=inline
     export function DHT11Value(dht11pin: DigitalPin, dht11type: DHT11_TYPE): number {
-        const DHT11_TIMEOUT = 100
+        //initialize
+        basic.pause(1000)
+
         const buffer = pins.createBuffer(40)
         const data = [0, 0, 0, 0, 0]
-        let startTime = control.micros()
 
-        if (control.hardwareVersion().slice(0, 1) !== '1') { // V2
-            // TODO: V2 bug
-            pins.digitalReadPin(DigitalPin.P0);
-            pins.digitalReadPin(DigitalPin.P1);
-            pins.digitalReadPin(DigitalPin.P2);
-            pins.digitalReadPin(DigitalPin.P3);
-            pins.digitalReadPin(DigitalPin.P4);
-            pins.digitalReadPin(DigitalPin.P10);
+        pins.setPull(dht11pin, PinPullMode.PullUp)
+        // 1.start signal
+        pins.digitalWritePin(dht11pin, 0)
+        basic.pause(18)
 
-            // 1.start signal
-            pins.digitalWritePin(dht11pin, 0)
-            basic.pause(18)
+        // 2.pull up and wait 40us
+        pins.digitalReadPin(dht11pin)
+        control.waitMicros(40)
 
-            // 2.pull up and wait 40us
-            pins.setPull(dht11pin, PinPullMode.PullUp)
-            pins.digitalReadPin(dht11pin)
-            control.waitMicros(40)
+        // 3.read data		
+        while (pins.digitalReadPin(dht11pin) === 0);
+        while (pins.digitalReadPin(dht11pin) === 1);
 
-            // 3.read data
-            startTime = control.micros()
-            while (pins.digitalReadPin(dht11pin) === 0) {
-                if (control.micros() - startTime > DHT11_TIMEOUT) break
-            }
-            startTime = control.micros()
-            while (pins.digitalReadPin(dht11pin) === 1) {
-                if (control.micros() - startTime > DHT11_TIMEOUT) break
-            }
-
-            for (let dataBits = 0; dataBits < 40; dataBits++) {
-                startTime = control.micros()
-                while (pins.digitalReadPin(dht11pin) === 1) {
-                    if (control.micros() - startTime > DHT11_TIMEOUT) break
-                }
-                startTime = control.micros()
-                while (pins.digitalReadPin(dht11pin) === 0) {
-                    if (control.micros() - startTime > DHT11_TIMEOUT) break
-                }
-                control.waitMicros(28)
-                if (pins.digitalReadPin(dht11pin) === 1) {
-                    buffer[dataBits] = 1
-                }
-            }
-        } else { // V1
-            // 1.start signal
-            pins.digitalWritePin(dht11pin, 0)
-            basic.pause(18)
-
-            // 2.pull up and wait 40us
-            pins.setPull(dht11pin, PinPullMode.PullUp)
-            pins.digitalReadPin(dht11pin)
-            control.waitMicros(40)
-
-            // 3.read data
-            if (pins.digitalReadPin(dht11pin) === 0) {
-                while (pins.digitalReadPin(dht11pin) === 0);
-                while (pins.digitalReadPin(dht11pin) === 1);
-
-                for (let dataBits = 0; dataBits < 40; dataBits++) {
-                    while (pins.digitalReadPin(dht11pin) === 1);
-                    while (pins.digitalReadPin(dht11pin) === 0);
-                    control.waitMicros(28)
-                    if (pins.digitalReadPin(dht11pin) === 1) {
-                        buffer[dataBits] = 1
-                    }
-                }
+        for (let index = 0; index < 40; index++) {
+            while (pins.digitalReadPin(dht11pin) === 1);
+            while (pins.digitalReadPin(dht11pin) === 0);
+            control.waitMicros(28)
+            if (pins.digitalReadPin(dht11pin) === 1) {
+                buffer[index] = 1
             }
         }
 
@@ -252,7 +226,7 @@ namespace Module {
 
     //% subcategory="输出模块"
     //% blockId=SetLED weight=50 blockGap=15
-    //% block="Set LED %lpin|status %lstatus"    
+    //% block="Set LED %lpin|status %lstatus"
     export function SetLED(lpin: DigitalPin, lstatus: LED_ON_OFF): void {
         pins.digitalWritePin(lpin, lstatus)
     }
@@ -287,5 +261,108 @@ namespace Module {
     //% block="Buzzer pin %pin|freq %freq"
     export function ActuatorBuzzer(pin: AnalogPin, freq: number): void {
         pins.analogWritePin(pin, freq)
+    }
+
+
+    let I2C_ADDRESS_CMD = 0x24
+    let I2C_ADDRESS_DIS = 0x34
+    let _SEG = [0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71]
+    let _intensity = 3
+    let dbuf = [0, 0, 0, 0]
+
+    function SendCmd(cmd: number) {
+        pins.i2cWriteNumber(I2C_ADDRESS_CMD, cmd, NumberFormat.Int8BE)
+    }
+
+    function SendData(bit: number, data: number) {
+        pins.i2cWriteNumber(I2C_ADDRESS_DIS + (bit % 4), data, NumberFormat.Int8BE)
+    }
+
+    //% subcategory="输出模块" group="TM1650数码管"
+    //% blockId=TM1650Control weight=47 blockGap=15
+    //% block="display control"
+    function TM1650Control(cmd: TM1650_OPT) {
+        if (cmd == 0) {
+            SendCmd(_intensity * 16 + 1)
+        }
+        if (cmd == 1) {
+            _intensity = 0
+            SendCmd(0)
+        }
+        if (cmd == 2) {
+            SendData(0, 0)
+            SendData(1, 0)
+            SendData(2, 0)
+            SendData(3, 0)
+            dbuf = [0, 0, 0, 0]
+        }
+    }
+
+    //% subcategory="输出模块" group="TM1650数码管"
+    //% blockId=TM1650Digit weight=80 blockGap=8
+    //% block="Bit %bit | show digit %num"    
+    //% num.max=15 num.min=0
+    //% bit.max=3 bit.min=0
+    export function TM1650Digit(bit: number, num: number) {
+        dbuf[bit % 4] = _SEG[num % 16]
+        SendData(bit, _SEG[num % 16])
+    }
+
+    //% subcategory="输出模块" group="TM1650数码管"
+    //% blockId="TM1650ShowNumber" weight=100 blockGap=8    
+    //% block="show number %num"
+    export function TM1650ShowNumber(num: number) {
+        if (num < 0) {
+            SendData(0, 0x40) // '-'
+            num = -num
+        }
+        else
+            TM1650Digit(Math.idiv(num, 1000) % 10, 0)
+        TM1650Digit(num % 10, 3)
+        TM1650Digit(Math.idiv(num, 10) % 10, 2)
+        TM1650Digit(Math.idiv(num, 100) % 10, 1)
+    }
+
+    //% subcategory="输出模块" group="TM1650数码管"
+    //% block="show hex number %num"
+    //% blockId="TM1650ShowHex" weight=90 blockGap=8
+    export function TM1650ShowHex(num: number) {
+        if (num < 0) {
+            SendData(0, 0x40) // '-'
+            num = -num
+        }
+        else
+            TM1650Digit((num >> 12) % 16, 0)
+        TM1650Digit(num % 16, 3)
+        TM1650Digit((num >> 4) % 16, 2)
+        TM1650Digit((num >> 8) % 16, 1)
+    }
+
+    //% subcategory="输出模块" group="TM1650数码管"
+    //% blockId="TM1650ShowDp" weight=80 blockGap=8
+    //% block="show dot point %bit|show %status"
+    //% bit.max=3 bit.min=0
+    export function TM1650ShowDp(bit: number, status: LED_ON_OFF) {
+        let show = status == 1 ? true : false;
+        if (show) SendData(bit, dbuf[bit % 4] | 0x80)
+        else SendData(bit, dbuf[bit % 4] & 0x7F)
+    }
+
+    //% subcategory="输出模块" group="TM1650数码管"
+    //% blockId=TM1650SetIntensity weight=70 blockGap=8
+    //% block="set intensity %value"
+    //% value.max=7 value.min=0
+    export function TM1650SetIntensity(value: number) {
+        if ((value < 0) || (value > 8)) {
+            return
+        }
+        if (value == 0) {
+            _intensity = 0
+            SendCmd(0)
+        }
+        else {
+            _intensity = value
+            SendCmd((value << 4) | 0x01)
+        }
     }
 }

@@ -5,6 +5,7 @@
     "Module.TouchButton|block": "触摸开关%pin被按下？",
     "Module.InfraredSensor|block": "红外接收头%pin码值",
     "Module.TrackingSensor|block": "红外循迹传感器%pin黑线？",
+    "Module.HumanbodySensor|block": "人体感应器%pin有人？",
     "Module.VibrationSensor|block": "震动传感器%pin震动？",
     "Module.VibrationSensorAnalog|block": "震动传感器%pin震动值",
     "Module.Potentiometer|block": "电位器%pin电位值",
@@ -24,5 +25,14 @@
     "Module.SetLED|block": "LED灯%lpin | %lstatus",
     "Module.SetRGBpin|block": "RGB灯初始化|红(R)%Rpin|绿(G)%Gpin|蓝(B)%Bpin",
     "Module.SelectColor|block": "RGB灯颜色值|红(R)%r_color|绿(G)%g_color|蓝(B)%b_color",
-    "Module.ActuatorBuzzer|block": "蜂鸣器%pin频率%freqHz"
+    "Module.ActuatorBuzzer|block": "蜂鸣器%pin频率%freqHz",
+    "TM1650_OPT.TM1650_CLEAR|block": "清除",
+    "TM1650_OPT.TM1650_ON|block": "打开",
+    "TM1650_OPT.TM1650_OFF|block": "关闭",
+    "Module.TM1650Control|block": "TM1650数码管%cmd显示",
+    "Module.TM1650Digit|block": "TM1650数码管在第%bit位显示%num",
+    "Module.TM1650ShowNumber|block": "TM1650数码管显示数字%num",
+    "Module.TM1650ShowHex|block": "TM1650数码管显示十六进制数据%num",
+    "Module.TM1650ShowDp|block": "TM1650数码管第%bit位的点%status",
+    "Module.TM1650SetIntensity|block": "TM1650数码管设置亮度%value"
 }

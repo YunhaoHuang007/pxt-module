@@ -270,8 +270,8 @@ namespace Module {
     let _intensity = 3
     let dbuf = [0, 0, 0, 0]
 
-    function TM1650SendCmd(cmd: number) {
-        pins.i2cWriteNumber(I2C_ADDRESS_CMD, cmd, NumberFormat.Int8BE)
+    function TM1650SendCmd(tmcmd: number) {
+        pins.i2cWriteNumber(I2C_ADDRESS_CMD, tmcmd, NumberFormat.Int8BE)
     }
 
     function TM1650SendData(bit: number, data: number) {
@@ -281,15 +281,15 @@ namespace Module {
     //% subcategory="输出模块" group="TM1650数码管"
     //% blockId=TM1650Control weight=47 blockGap=15
     //% block="display control"
-    function TM1650Control(cmd: TM1650_OPT) {
-        if (cmd == 0) {
+    function TM1650Control(tmcmd: TM1650_OPT) {
+        if (tmcmd == 0) {
             TM1650SendCmd(_intensity * 16 + 1)
         }
-        if (cmd == 1) {
+        if (tmcmd == 1) {
             _intensity = 0
             TM1650SendCmd(0)
         }
-        if (cmd == 2) {
+        if (tmcmd == 2) {
             TM1650SendData(0, 0)
             TM1650SendData(1, 0)
             TM1650SendData(2, 0)
@@ -300,7 +300,7 @@ namespace Module {
 
     //% subcategory="输出模块" group="TM1650数码管"
     //% blockId=TM1650Digit weight=80 blockGap=8
-    //% block="Bit %bit | show digit %num"    
+    //% block="Bit %bit | show digit %num"
     //% num.max=15 num.min=0
     //% bit.max=3 bit.min=0
     export function TM1650Digit(bit: number, num: number) {

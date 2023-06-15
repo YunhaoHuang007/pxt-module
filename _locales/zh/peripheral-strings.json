@@ -29,12 +29,10 @@
     "TM1650_OPT.TM1650_CLEAR|block": "清除",
     "TM1650_OPT.TM1650_ON|block": "打开",
     "TM1650_OPT.TM1650_OFF|block": "关闭",
-    "sensors.setIntensity|block": "TM1650数码管设置亮度%dat",
-    "sensors.showNumber|block": "TM1650数码管显示数字%num",
-    "sensors.clear|block": "TM1650数码管清除显示",
-    "sensors.on|block": "TM1650数码管打开显示",
-    "sensors.off|block": "TM1650数码管关闭显示",
-    "sensors.showHex|block": "TM1650数码管显示十六进制数据%num",
-    "sensors.digit|block": "TM1650数码管显示数据%num在第%bit位",
-    "sensors.showDpAt|block": "TM1650数码管%show第%bit位的点"
+    "Module.TM1650Control|block": "TM1650数码管%cmd显示",
+    "Module.TM1650Digit|block": "TM1650数码管显示%num在第%bit位",
+    "Module.TM1650ShowNumber|block": "TM1650数码管显示数字%num",
+    "Module.TM1650ShowHex|block": "TM1650数码管显示十六进制数据%num",
+    "Module.TM1650ShowDp|block": "TM1650数码管第%bit位的点%status",
+    "Module.TM1650SetIntensity|block": "TM1650数码管设置亮度%value"
 }

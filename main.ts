@@ -301,10 +301,10 @@ namespace Module {
 
     //% subcategory="输出模块" group="TM1650数码管"
     //% blockId=TM1650Digit weight=80 blockGap=8
-    //% block="Bit %bit | show digit %num"
+    //% block="show digit %num | at %bit"
     //% num.max=15 num.min=0
     //% bit.max=3 bit.min=0
-    export function TM1650Digit(bit: number, num: number) {
+    export function TM1650Digit(num: number, bit: number) {
         dbuf[bit % 4] = _SEG[num % 16]
         TM1650SendData(bit, _SEG[num % 16])
     }

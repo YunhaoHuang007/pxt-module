@@ -60,17 +60,6 @@ namespace Module {
     }
 
     //% subcategory="传感器模块"
-    //% blockId=InfraredSensor weight=80 blockGap=15
-    //% block="Infrared sensor pin %pin black line detected?"
-    export function InfraredSensor(pin: DigitalPin): boolean {
-        if (pins.digitalReadPin(pin) == 1) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    //% subcategory="传感器模块"
     //% blockId=TrackingSensor weight=79 blockGap=15
     //% block="Tracking sensor pin %pin black line detected?"
     export function TrackingSensor(pin: DigitalPin): boolean {
@@ -129,10 +118,17 @@ namespace Module {
         return temp;
     }
 
+    //% subcategory="传感器模块"
+    //% blockId=InfraredSensor weight=72 blockGap=15
+    //% block="Infrared sensor pin %pin  get the code"
+    export function InfraredSensor(pin: AnalogPin): number {
+        return pins.analogReadPin(pin);
+    }
+
     let rockerPinX = 0;
     let rockerPinY = 0;
     //% subcategory="传感器模块"
-    //% blockId=RockerPin weight=72 blockGap=15
+    //% blockId=RockerPin weight=71 blockGap=15
     //% block="RockerPin setup | pinX %pinx|pinY %piny"
     export function RockerPin(pinx: AnalogPin, piny: AnalogPin): void {
         rockerPinX = pinx;
@@ -140,7 +136,7 @@ namespace Module {
     }
 
     //% subcategory="传感器模块"
-    //% blockId=RockerAnalogRead weight=71 blockGap=15
+    //% blockId=RockerAnalogRead weight=70 blockGap=15
     //% block="Get rocker analog pin  %selectpin value"
     export function RockerAnalogRead(selectpin: ROCKER_PIN): number {
         let pinSelect;
@@ -154,7 +150,7 @@ namespace Module {
     let dht11Temperature = 0;
     let dht11Humidity = 0;
     //% subcategory="传感器模块"
-    //% blockId=DHT11Value weight=70 blockGap=15
+    //% blockId=DHT11Value weight=69 blockGap=15
     //% block="Value of DHT11 %dht11type at pin %dht11pin"
     //% inlineInputMode=inline    
     export function DHT11Value(dht11pin: DigitalPin, dht11type: DHT11_TYPE): number {
@@ -287,6 +283,7 @@ namespace Module {
 
     //% subcategory="输出模块"
     //% blockId=ActuatorBuzzer weight=47 blockGap=15
+    //% freq.min=0  freq.max=5000
     //% block="Buzzer pin %pin|freq %freq"
     export function ActuatorBuzzer(pin: AnalogPin, freq: number): void {
         pins.analogWritePin(pin, freq)

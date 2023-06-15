@@ -127,7 +127,7 @@ namespace Module {
 
     let rockerPinX = 0;
     let rockerPinY = 0;
-    //% subcategory="传感器模块"
+    //% subcategory="传感器模块" group="摇杆"
     //% blockId=RockerPin weight=71 blockGap=15
     //% block="RockerPin setup | pinX %pinx|pinY %piny"
     export function RockerPin(pinx: AnalogPin, piny: AnalogPin): void {
@@ -135,7 +135,7 @@ namespace Module {
         rockerPinY = piny;
     }
 
-    //% subcategory="传感器模块"
+    //% subcategory="传感器模块" group="摇杆"
     //% blockId=RockerAnalogRead weight=70 blockGap=15
     //% block="Get rocker analog pin  %selectpin value"
     export function RockerAnalogRead(selectpin: ROCKER_PIN): number {

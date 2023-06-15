@@ -264,7 +264,7 @@ namespace Module {
     let pinR = 0
     let pinG = 0
     let pinB = 0
-    //% subcategory="输出模块"
+    //% subcategory="输出模块" group="RGB灯"
     //% blockId=SetRGBpin weight=49 blockGap=15
     //% block="Set RGB pin|R %Rpin|G %Gpin|B %Bpin"
     export function SetRGBpin(Rpin: AnalogPin, Gpin: AnalogPin, Bpin: AnalogPin): void {
@@ -273,7 +273,7 @@ namespace Module {
         pinB = Bpin;
     }
 
-    //% subcategory="输出模块"
+    //% subcategory="输出模块" group="RGB灯"
     //% blockId=SelectColor weight=48 blockGap=15
     //% r_color.min=0  r_color.max=255
     //% g_color.min=0  g_color.max=255

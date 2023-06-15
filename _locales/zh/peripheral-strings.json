@@ -13,7 +13,7 @@
     "Module.SensorTemperature|block": "温度传感器%pin温度",
     "ROCKER_PIN.ROCKER_PIN_X|block": "X轴",
     "ROCKER_PIN.ROCKER_PIN_Y|block": "Y轴",
-    "Module.RockerPin|block": "摇杆模块X%pinx | Y%piny",
+    "Module.RockerPin|block": "摇杆模块X轴%pinx | Y轴%piny",
     "Module.RockerAnalogRead|block": "摇杆模块%selectpin坐标值",
     "DHT11_TYPE.DHT11_HUMIDITY|block": "湿度(0~100%)",
     "DHT11_TYPE.DHT11_TEMPERATURE_C|block": "摄氏温度(℃)",
@@ -22,7 +22,7 @@
     "LED_ON_OFF.LED_ON|block": "打开",
     "LED_ON_OFF.LED_OFF|block": "关闭",
     "Module.SetLED|block": "LED灯%lpin | %lstatus",
-    "Module.SetRGBpin|block": "RGB灯初始化红(R)%Rpin绿(G)%Gpin蓝(B)%Bpin",
+    "Module.SetRGBpin|block": "RGB灯初始化|红(R)%Rpin|绿(G)%Gpin|蓝(B)%Bpin",
     "Module.SelectColor|block": "RGB灯颜色值|红(R)%r_color|绿(G)%g_color|蓝(B)%b_color",
     "Module.ActuatorBuzzer|block": "蜂鸣器%pin频率%freqHz"
 }

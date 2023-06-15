@@ -274,8 +274,8 @@ namespace Module {
         pins.i2cWriteNumber(I2C_ADDRESS_CMD, tmcmd, NumberFormat.Int8BE)
     }
 
-    function TM1650SendData(bit: number, data: number) {
-        pins.i2cWriteNumber(I2C_ADDRESS_DIS + (bit % 4), data, NumberFormat.Int8BE)
+    function TM1650SendData(bit: number, tmdata: number) {
+        pins.i2cWriteNumber(I2C_ADDRESS_DIS + (bit % 4), tmdata, NumberFormat.Int8BE)
     }
 
     //% subcategory="输出模块" group="TM1650数码管"

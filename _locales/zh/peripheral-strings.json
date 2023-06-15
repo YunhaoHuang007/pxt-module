@@ -34,5 +34,5 @@
     "Module.TM1650ShowNumber|block": "TM1650数码管显示数字%num",
     "Module.TM1650ShowHex|block": "TM1650数码管显示十六进制数据%num",
     "Module.TM1650ShowDp|block": "TM1650数码管第%bit位的点%status",
-    "Module.TM1650SetIntensity|block": "TM1650数码管设置亮度%value"
+    "Module.TM1650SetIntensity|block": "TM1650数码管设置te亮度%value"
 }

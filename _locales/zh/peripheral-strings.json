@@ -1,8 +1,8 @@
 {
     "Module|block": "Module",
-    "Module.SwitchModuleButton|block": "按键开关模块引脚%pin检测到开关是否被按下？",
-    "Module.Microswitch|block": "微型开关模块引脚%pin检测到开关是否被按下？",
-    "Module.TouchButton|block": "触摸开关模块引脚%pin检测到开关是否被按下？",
+    "Module.SwitchModuleButton|block": "按键开关%pin被按下？",
+    "Module.Microswitch|block": "微型开关%pin被按下？",
+    "Module.TouchButton|block": "触摸开关%pin被按下？",
     "Module.InfraredSensor|block": "红外传感器引脚%pin检测到黑线？",
     "Module.TrackingSensor|block": "红外循迹传感器引脚%pin检测到黑线？",
     "Module.VibrationSensor|block": "震动传感器引脚%pin检测到震动？",

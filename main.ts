@@ -1,32 +1,3 @@
-enum SWITCH_MODULE {
-    //% block="Button"
-    BUTTON = 0x0,
-    //% block="MicroSwitch"
-    MICROSWITCH = 0x1,
-    //% block="TouchButton"
-    TOUCHBUTTON = 0x2,
-}
-
-enum DIGITAL_SENSOR {
-    //% block="InfraredSensor"
-    SENSOR_INFRARED = 0x0,
-    //% block="TrackingSensor"
-    SENSOR_TRACKING = 0x1,
-    //% block="VibrationSensor"
-    SENSOR_VIBRATION = 0x2,    
-}
-
-enum ANALOG_SENSOR {
-    //% block="Potentiometer"
-    POTENTIOMETER = 0x0,
-    //% block="IlluminationSensor"
-    SENSOR_ILLUMINATION = 0x1,
-    //% block="HallSensor"
-    SENSOR_HALL = 0x2,
-    //% block="VibrationSensor"
-    SENSOR_VIBRATION = 0x3,
-}
-
 enum LED_ON_OFF {
     //% block="ON"
     LED_ON = 1,
@@ -56,28 +27,31 @@ namespace Module {
     let switchPin = 0;
     let switchModule = 0;
     //% subcategory="开关模块"
-    //% blockId=ButtonModule weight=100 blockGap=15
-    //% block="Module %swtm | connect to pin %pin"    
-    export function SwitchModuleConnect(swtm: SWITCH_MODULE, pin: DigitalPin): void {
-        switchModule = swtm;
-        switchPin = pin;
-    }
-
-    //% subcategory="开关模块"
-    //% blockId=SwitchButton weight=99 blockGap=15
-    //% block="Is the switch pressed?"
-    export function SwitchButton(): boolean {
-        if (pins.digitalReadPin(switchPin) == 1) {
+    //% blockId=SwitchModuleButton weight=100 blockGap=15
+    //% block="Switch module button pin %pin detected button pressed?"
+    export function SwitchModuleButton(pin: DigitalPin): boolean {
+        if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
             return true;
         }
     }
 
-    //% subcategory="传感器模块"
-    //% blockId=DigitalSensor weight=98 blockGap=15
-    //% block="Sensor %dsensor | connect to pin %pin"
-    export function DigitalSensor(dsensor: DIGITAL_SENSOR, pin: DigitalPin): boolean {
+    //% subcategory="开关模块"
+    //% blockId=Microswitch weight=99 blockGap=15
+    //% block="Microswitch pin %pin detected switch pressed?"
+    export function Microswitch(pin: DigitalPin): boolean {
+        if (pins.digitalReadPin(pin) == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //% subcategory="开关模块"
+    //% blockId=TouchButton weight=98 blockGap=15
+    //% block="TouchButton pin %pin detected button pressed?"
+    export function TouchButton(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
             return false;
         } else {
@@ -86,15 +60,68 @@ namespace Module {
     }
 
     //% subcategory="传感器模块"
-    //% blockId=AnalogSensor weight=97 blockGap=15
-    //% block="Sensor %asensor | connect to pin %pin"
-    export function AnalogSensor(asensor: ANALOG_SENSOR, pin: AnalogPin): number {
-        let value = pins.analogReadPin(pin);
-        return value;
+    //% blockId=InfraredSensor weight=80 blockGap=15
+    //% block="Infrared sensor pin %pin black line detected?"
+    export function InfraredSensor(pin: DigitalPin): boolean {
+        if (pins.digitalReadPin(pin) == 1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     //% subcategory="传感器模块"
-    //% blockId=SensorTemperature weight=96 blockGap=15
+    //% blockId=TrackingSensor weight=79 blockGap=15
+    //% block="Tracking sensor pin %pin black line detected?"
+    export function TrackingSensor(pin: DigitalPin): boolean {
+        if (pins.digitalReadPin(pin) == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //% subcategory="传感器模块"
+    //% blockId=VibrationSensor weight=78 blockGap=15
+    //% block="Vibration sensor pin %pin vibration detected?"
+    export function VibrationSensor(pin: DigitalPin): boolean {
+        if (pins.digitalReadPin(pin) == 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //% subcategory="传感器模块"
+    //% blockId=VibrationSensorAnalog weight=77 blockGap=15
+    //% block="Vibration sensor pin %pin obtain vibration value"
+    export function VibrationSensorAnalog(pin: AnalogPin): number {
+        return pins.analogReadPin(pin);
+    }
+
+    //% subcategory="传感器模块"
+    //% blockId=Potentiometer weight=76 blockGap=15
+    //% block="Potentiometer sensor pin %pin obtain potential value"
+    export function Potentiometer(pin: AnalogPin): number {
+        return pins.analogReadPin(pin);
+    }
+
+    //% subcategory="传感器模块"
+    //% blockId=IlluminationSensor weight=75 blockGap=15
+    //% block="Illumination sensor pin %pin obtain value of light intensity"
+    export function IlluminationSensor(pin: AnalogPin): number {
+        return pins.analogReadPin(pin);
+    }
+
+    //% subcategory="传感器模块"
+    //% blockId=HallSensor weight=74 blockGap=15
+    //% block="Hall sensor pin %pin obtain simulated value"
+    export function HallSensor(pin: AnalogPin): number {
+        return pins.analogReadPin(pin);
+    }
+
+    //% subcategory="传感器模块"
+    //% blockId=SensorTemperature weight=73 blockGap=15
     //% block="Temperature sensor %pin get the ambient temperature"
     //% inlineInputMode=inline
     export function SensorTemperature(pin: AnalogPin): number {
@@ -105,7 +132,7 @@ namespace Module {
     let rockerPinX = 0;
     let rockerPinY = 0;
     //% subcategory="传感器模块"
-    //% blockId=RockerPin weight=95 blockGap=15
+    //% blockId=RockerPin weight=72 blockGap=15
     //% block="RockerPin setup | pinX %pinx|pinY %piny"
     export function RockerPin(pinx: AnalogPin, piny: AnalogPin): void {
         rockerPinX = pinx;
@@ -113,7 +140,7 @@ namespace Module {
     }
 
     //% subcategory="传感器模块"
-    //% blockId=RockerAnalogRead weight=94 blockGap=15
+    //% blockId=RockerAnalogRead weight=71 blockGap=15
     //% block="Get rocker analog pin  %selectpin value"
     export function RockerAnalogRead(selectpin: ROCKER_PIN): number {
         let pinSelect;
@@ -127,7 +154,7 @@ namespace Module {
     let dht11Temperature = 0;
     let dht11Humidity = 0;
     //% subcategory="传感器模块"
-    //% blockId=DHT11Value weight=93 blockGap=15
+    //% blockId=DHT11Value weight=70 blockGap=15
     //% block="Value of DHT11 %dht11type at pin %dht11pin"
     //% inlineInputMode=inline    
     export function DHT11Value(dht11pin: DigitalPin, dht11type: DHT11_TYPE): number {
@@ -228,7 +255,7 @@ namespace Module {
     }
 
     //% subcategory="输出模块"
-    //% blockId=SetLED weight=80 blockGap=15
+    //% blockId=SetLED weight=50 blockGap=15
     //% block="Set LED %lpin|status %lstatus"    
     export function SetLED(lpin: DigitalPin, lstatus: LED_ON_OFF): void {
         pins.digitalWritePin(lpin, lstatus)
@@ -238,7 +265,7 @@ namespace Module {
     let pinG = 0
     let pinB = 0
     //% subcategory="输出模块"
-    //% blockId=SetRGBpin weight=79 blockGap=15
+    //% blockId=SetRGBpin weight=49 blockGap=15
     //% block="Set RGB pin|R %Rpin|G %Gpin|B %Bpin"
     export function SetRGBpin(Rpin: AnalogPin, Gpin: AnalogPin, Bpin: AnalogPin): void {
         pinR = Rpin;
@@ -247,7 +274,7 @@ namespace Module {
     }
 
     //% subcategory="输出模块"
-    //% blockId=SelectColor weight=78 blockGap=15
+    //% blockId=SelectColor weight=48 blockGap=15
     //% r_color.min=0  r_color.max=255
     //% g_color.min=0  g_color.max=255
     //% b_color.min=0  b_color.max=255
@@ -259,7 +286,7 @@ namespace Module {
     }
 
     //% subcategory="输出模块"
-    //% blockId=ActuatorBuzzer weight=77 blockGap=15
+    //% blockId=ActuatorBuzzer weight=47 blockGap=15
     //% block="Buzzer pin %pin|freq %freq"
     export function ActuatorBuzzer(pin: AnalogPin, freq: number): void {
         pins.analogWritePin(pin, freq)

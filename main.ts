@@ -280,7 +280,7 @@ namespace Module {
     }
 
     //% subcategory="输出模块" group="TM1650数码管"
-    //% blockId=TM1650Control weight=47 blockGap=15
+    //% blockId=TM1650Control weight=80 blockGap=15
     //% block="display control"
     function TM1650Control(tmcmd: TM1650_OPT) {
         if (tmcmd == 0) {
@@ -310,7 +310,7 @@ namespace Module {
     }
 
     //% subcategory="输出模块" group="TM1650数码管"
-    //% blockId="TM1650ShowNumber" weight=100 blockGap=8    
+    //% blockId="TM1650ShowNumber" weight=80 blockGap=8    
     //% block="show number %num"
     export function TM1650ShowNumber(num: number) {
         if (num < 0) {
@@ -326,7 +326,7 @@ namespace Module {
 
     //% subcategory="输出模块" group="TM1650数码管"
     //% block="show hex number %num"
-    //% blockId="TM1650ShowHex" weight=90 blockGap=8
+    //% blockId="TM1650ShowHex" weight=80 blockGap=8
     export function TM1650ShowHex(num: number) {
         if (num < 0) {
             TM1650SendData(0, 0x40) // '-'
@@ -350,7 +350,7 @@ namespace Module {
     }
 
     //% subcategory="输出模块" group="TM1650数码管"
-    //% blockId=TM1650SetIntensity weight=70 blockGap=8
+    //% blockId=TM1650SetIntensity weight=80 blockGap=8
     //% block="set intensity %value"
     //% value.max=7 value.min=0
     export function TM1650SetIntensity(value: number) {

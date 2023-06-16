@@ -281,7 +281,7 @@ namespace Module {
 
     //% subcategory="输出模块" group="TM1650数码管"
     //% blockId=TM1650Control weight=80 blockGap=8
-    //% block="display control"
+    //% block="display control %tmcmd"
     function TM1650Control(tmcmd: TM1650_OPT) {
         if (tmcmd == 0) {
             TM1650SendCmd(_intensity * 16 + 1)

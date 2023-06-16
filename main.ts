@@ -280,7 +280,7 @@ namespace Module {
     }
 
     //% subcategory="输出模块" group="TM1650数码管"
-    //% blockId=TM1650Control weight=80 blockGap=15
+    //% blockId=TM1650Control weight=80 blockGap=8
     //% block="display control"
     function TM1650Control(tmcmd: TM1650_OPT) {
         if (tmcmd == 0) {

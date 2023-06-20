@@ -25,7 +25,7 @@
     "Module.SetLED|block": "LED灯%lpin | %lstatus",
     "Module.SetRGBpin|block": "RGB灯初始化|红(R)%Rpin|绿(G)%Gpin|蓝(B)%Bpin",
     "Module.SelectColor|block": "RGB灯颜色值|红(R)%r_color|绿(G)%g_color|蓝(B)%b_color",
-    "Module.ActuatorBuzzer|block": "蜂鸣器%pin频率%freqHz",
+    "Module.ActuatorBuzzer|block": "蜂鸣器%pin|频率%freq|Hz",
     "TM1650_OPT.TM1650_CLEAR|block": "清除",
     "TM1650_OPT.TM1650_ON|block": "打开",
     "TM1650_OPT.TM1650_OFF|block": "关闭",

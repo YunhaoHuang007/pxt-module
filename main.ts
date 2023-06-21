@@ -170,7 +170,7 @@ namespace Module {
     let dht11Humidity = 0;
     //% subcategory="传感器模块"
     //% blockId=DHT11Value weight=69 blockGap=15
-    //% block="Value of DHT11 %dht11type at pin %dht11pin"
+    //% block="DHT11 pin %dht11pin get value of %dht11type"
     //% inlineInputMode=inline
     export function DHT11Value(dht11pin: DigitalPin, dht11type: DHT11_TYPE): number {
         //initialize

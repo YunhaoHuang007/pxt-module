@@ -68,7 +68,7 @@ namespace Module {
     }
 
     //% subcategory="传感器模块"
-    //% blockId=TrackingSensor weight=79 blockGap=15
+    //% blockId=TrackingSensor weight=80 blockGap=15
     //% block="Tracking sensor pin %pin black line detected?"
     export function TrackingSensor(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
@@ -79,7 +79,7 @@ namespace Module {
     }
 
     //% subcategory="传感器模块"
-    //% blockId=HumanbodySensor weight=78 blockGap=15
+    //% blockId=HumanbodySensor weight=79 blockGap=15
     //% block="Humanbody sensor %pin humanbody detected?"
     export function HumanbodySensor(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
@@ -94,9 +94,9 @@ namespace Module {
     //% block="Vibration sensor pin %pin vibration detected?"
     export function VibrationSensor(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
 

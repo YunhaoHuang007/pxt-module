@@ -83,9 +83,9 @@ namespace Module {
     //% block="Humanbody sensor %pin humanbody detected?"
     export function HumanbodySensor(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
 

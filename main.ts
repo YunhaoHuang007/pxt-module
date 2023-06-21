@@ -115,6 +115,13 @@ namespace Module {
     }
 
     //% subcategory="传感器模块"
+    //% blockId=PhotosensSensorA weight=75 blockGap=15
+    //% block="Photosensitive sensor pin %pin obtain value of light intensity"
+    export function PhotosensSensorA(pin: AnalogPin): number {
+        return pins.analogReadPin(pin);
+    }
+
+    //% subcategory="传感器模块"
     //% blockId=PhotosensSensorD weight=75 blockGap=15
     //% block="Photosensitive sensor pin %pin light detected?"
     export function PhotosensSensorD(pin: DigitalPin): boolean {
@@ -123,13 +130,6 @@ namespace Module {
         } else {
             return false;
         }
-    }
-
-    //% subcategory="传感器模块"
-    //% blockId=PhotosensSensorA weight=75 blockGap=15
-    //% block="Photosensitive sensor pin %pin obtain value of light intensity"
-    export function PhotosensSensorA(pin: AnalogPin): number {
-        return pins.analogReadPin(pin);
     }
 
     //% subcategory="传感器模块"

@@ -199,7 +199,8 @@ namespace Module {
         pins.digitalWritePin(dht11pin, 0)
         basic.pause(18)
 
-        // 2.pull up and wait 40us
+        // 2.pull up and wait 40us        
+        pins.setPull(dht11pin, PinPullMode.PullUp)
         pins.digitalReadPin(dht11pin)
         control.waitMicros(40)
 

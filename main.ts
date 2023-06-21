@@ -126,9 +126,9 @@ namespace Module {
     //% block="Photosensitive sensor pin %pin light detected?"
     export function PhotosensSensorD(pin: DigitalPin): boolean {
         if (pins.digitalReadPin(pin) == 1) {
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 

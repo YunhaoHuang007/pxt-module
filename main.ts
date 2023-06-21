@@ -134,9 +134,13 @@ namespace Module {
 
     //% subcategory="传感器模块"
     //% blockId=HallSensor weight=74 blockGap=15
-    //% block="Hall sensor pin %pin obtain simulated value"
-    export function HallSensor(pin: AnalogPin): number {
-        return pins.analogReadPin(pin);
+    //% block="Hall sensor pin %pin magnetic field detected?"
+    export function HallSensor(pin: DigitalPin): boolean {
+        if (pins.digitalReadPin(pin) == 1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     //% subcategory="传感器模块"

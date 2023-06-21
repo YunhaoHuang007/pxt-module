@@ -11,7 +11,7 @@
     "Module.Potentiometer|block": "电位器%pin电位值",
     "Module.PhotosensSensorD|block": "光敏传感器%pin有光？",
     "Module.PhotosensSensorA|block": "光敏传感器%pin光照强度值",
-    "Module.HallSensor|block": "霍尔传感器%pin模拟值",
+    "Module.HallSensor|block": "霍尔传感器%pin有磁场？",
     "Module.SensorTemperature|block": "温度传感器%pin温度",
     "ROCKER_PIN.ROCKER_PIN_X|block": "X轴",
     "ROCKER_PIN.ROCKER_PIN_Y|block": "Y轴",
